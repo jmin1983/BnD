@@ -1,0 +1,8 @@
+[submodule "Native/B1"]
+	path = Native/B1
+	url = https://github.com/jmin1983/B1
+	branch = main
+[submodule "Native/D1"]
+	path = Native/D1
+	url = https://github.com/jmin1983/D1
+	branch = main

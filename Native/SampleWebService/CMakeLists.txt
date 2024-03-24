@@ -1,0 +1,8 @@
+add_subdirectory(SWSBase)
+add_subdirectory(SWSStandard)
+add_subdirectory(SWSIntegrated)
+add_subdirectory(SampleWebService)
+list(APPEND ${BnD_COMPONENTS} "SWSBase")
+list(APPEND ${BnD_COMPONENTS} "SWSStandard")
+list(APPEND ${BnD_COMPONENTS} "SWSIntegrated")
+list(APPEND ${BnD_COMPONENTS} "SampleWebService")

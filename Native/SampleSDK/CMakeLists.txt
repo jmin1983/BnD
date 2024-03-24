@@ -1,0 +1,8 @@
+add_subdirectory(SampleBase)
+add_subdirectory(SampleData)
+add_subdirectory(SampleDBClient)
+add_subdirectory(SampleMessage)
+list(APPEND ${BnD_COMPONENTS} "SampleBase")
+list(APPEND ${BnD_COMPONENTS} "SampleData")
+list(APPEND ${BnD_COMPONENTS} "SampleDBClient")
+list(APPEND ${BnD_COMPONENTS} "SampleMessage")

@@ -1,0 +1,22 @@
+tested with x64, c++20
+
+boost version: 1.84
+just unzip boost_lib. no installation required.
+for windows, set boost directory as,
+"C:/Program Files/boost/boost_1_84_0"
+see 31 line "CMakeList.txt"
+for linux, set boost directory with,
+-DBoost_INCLUDE_DIR
+see "linux_build_option" for reference
+
+cmake version: 3.29.0
+set cmake
+"Where is the source code:" to
+"<some_path>/BnD/Native"
+"Where to build the binaries:" to
+"<some_path>/BnD/Native/build"
+
+pre-built open_ssl for convenience:
+"<some_path>/BnD/Native/external/lib"
+for windows dll,
+"<some_path>/BnD/Native/build/bin"

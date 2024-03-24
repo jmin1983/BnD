@@ -1,0 +1,8 @@
+add_subdirectory(GeneralUI)
+add_subdirectory(BaseMFC)
+add_subdirectory(SampleWebServiceMFC)
+add_subdirectory(SampleWindowService)
+list(APPEND ${BnD_COMPONENTS} "GeneralUI")
+list(APPEND ${BnD_COMPONENTS} "BaseMFC")
+list(APPEND ${BnD_COMPONENTS} "SampleWebServiceMFC")
+list(APPEND ${BnD_COMPONENTS} "SampleWindowService")
