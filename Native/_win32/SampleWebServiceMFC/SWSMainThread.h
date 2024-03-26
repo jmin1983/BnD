@@ -16,7 +16,6 @@
 #include "SampleWebServiceMFC.h"
 
 namespace BnD {
-    class ConveyorDistributedControlServicePublic;
     class BaseMFCTabCtrlWnd;
     class SWSMainThread : public BaseMFCMainThreadWrapper<SampleWebServiceMFC, SWSMainThread> {
     public:
