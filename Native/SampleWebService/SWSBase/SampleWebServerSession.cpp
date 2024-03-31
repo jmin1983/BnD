@@ -46,7 +46,7 @@ void SampleWebServerSession::onWebSocketAccepted()
     B1LOG("web socket accepted: peerAddress[%s], localPort[%d]", peerAddress().cString(), localPort());
 }
 
-bool SampleWebServerSession::onWebSocketReadComplete(const B1String& text)
+bool SampleWebServerSession::onWebSocketReadComplete(B1String&& text)
 {
     BaseSampleWebService::get()->messageAnalyzer()->analyzeMessage(this, text, 0);
     return true;

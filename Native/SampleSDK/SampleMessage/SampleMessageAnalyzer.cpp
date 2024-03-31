@@ -38,7 +38,7 @@ bool SampleMessageAnalyzer::implInitialize()
         return false;
     }
 #define INSERT_TABLE_VALUE(c) table->insert(std::make_pair(c::messageString().copy(), MAKE_DIAACA_MSG_ENUM(c)));
-    std::map<B1String, int32>* table = &_messageTable;
+    auto* table = &_messageTable;
     INSERT_TABLE_VALUE(SampleMsgInitializeReq);
 
     if (_messageTable.size() != MSG_COUNTS + DIAACA_MSG_COUNTS - DIAACA_MSG_BEGIN - 1) {

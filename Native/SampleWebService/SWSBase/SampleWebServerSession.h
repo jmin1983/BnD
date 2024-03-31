@@ -30,7 +30,7 @@ namespace BnD {
         bool onMessageSampleMsgInitializeReq(const SampleMsgInitializeReq& data, int32 from) final;
     protected:  // B1WebSocketServerSession
         void onWebSocketAccepted() final;
-        bool onWebSocketReadComplete(const B1String& text) final;           //  return false if there are no more data to read.
+        bool onWebSocketReadComplete(B1String&& text) final;                //  return false if there are no more data to read.
         //bool onWebSocketReadComplete(const std::vector<uint8>& data) final; //  return false if there are no more data to read.
     public:
         bool writeMessage(const class D1BaseMessage& message) const;

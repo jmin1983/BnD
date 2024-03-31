@@ -28,7 +28,7 @@ bool SampleWindowService::start()
     D1ConfFileReader config;
     config.load();
     if (_service->start(config.redisAddress(), config.redisPort(), config.redisDB(),
-        config.logPath(_service->serviceName()), config.logCounts()) != true) {
+        config.logPath("sws_winservice"), config.logCounts()) != true) {
         return false;
     }
     return true;

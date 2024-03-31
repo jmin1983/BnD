@@ -42,7 +42,7 @@ int32 main(int32 argc, char* argv[])
     config.load();
     SampleWebService das;
     if (SampleWebService::get()->start(config.redisAddress(), config.redisPort(), config.redisDB(),
-                                    config.logPath(SampleWebService::get()->serviceName()), config.logCounts()) != true) {
+                                    config.logPath("sws"), config.logCounts()) != true) {
         return -1;
     }
     SampleWebService::get()->wait();

@@ -69,7 +69,7 @@ namespace BnD {
             }
             _mfcService = std::make_shared<T>();
             if (_mfcService->start(config->redisAddress(), config->redisPort(), config->redisDB(),
-                                   config->logPath(_mfcService->serviceName()), config->logCounts()) != true) {
+                                   config->logPath("sws_mfc"), config->logCounts()) != true) {
                 return;
             }
             BaseMFCMainThread::implThreadBegin();
