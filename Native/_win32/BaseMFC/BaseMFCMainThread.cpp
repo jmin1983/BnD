@@ -36,11 +36,12 @@ void BaseMFCMainThread::implThreadEnd()
     _listener = NULL;
 }
 
-bool BaseMFCMainThread::start(BaseMFCMainThreadListener* listener)
+bool BaseMFCMainThread::start(B1String&& name, BaseMFCMainThreadListener* listener)
 {
     if (isAlive()) {
         return false;
     }
+    _name = std::move(name);
     _listener = listener;
     return run();
 }

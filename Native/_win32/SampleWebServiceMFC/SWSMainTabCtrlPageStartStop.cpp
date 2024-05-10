@@ -14,6 +14,8 @@
 #include "SWSMainThread.h"
 #include "SWSMFCDlg.h"
 
+#include <SampleBase/ProductIdentifier.h>
+
 using namespace BnD;
 
 SWSMainTabCtrlPageStartStop::SWSMainTabCtrlPageStartStop(CWnd* owner)
@@ -45,7 +47,7 @@ void SWSMainTabCtrlPageStartStop::onBnClickedBtnStart()
         return;
     }
     setProgramRunning(IDC_EDIT_ADMIN_ADDRESS, IDC_EDIT_ADMIN_PORT, IDC_EDIT_ADMIN_DB);
-    if (SWSMainThread::get()->start(this) != true) {
+    if (SWSMainThread::get()->start("sws", this) != true) {
         setProgramStopped();
         AfxMessageBox("Unable to start WebAssistantService");
         return;
@@ -82,7 +84,9 @@ void SWSMainTabCtrlPageStartStop::onBnClickedBtnLoadConfig()
 
 bool SWSMainTabCtrlPageStartStop::implReloadPage()
 {
-    setCaptionTypeAndSite(SWSMainThread::get()->mainService()->redisClientInterface());
+    ProductIdentifier productIdentifier;
+    productIdentifier.getProductInfo(SWSMainThread::get()->mainService()->redisClientInterface());
+    setCaptionTypeAndSite(productIdentifier);
     return true;
 }
 
@@ -98,28 +102,28 @@ void SWSMainTabCtrlPageStartStop::implOnUIMFCServiceStopped()
 
 bool SWSMainTabCtrlPageStartStop::saveConfig(const B1String& path)
 {
-    CString redisAddress;
-    GetDlgItemText(IDC_EDIT_ADMIN_ADDRESS, redisAddress);
-    int32 redisPort = GetDlgItemInt(IDC_EDIT_ADMIN_PORT);
-    int32 redisDB = GetDlgItemInt(IDC_EDIT_ADMIN_DB);
+    CString adminAddress;
+    GetDlgItemText(IDC_EDIT_ADMIN_ADDRESS, adminAddress);
+    int32 adminPort = GetDlgItemInt(IDC_EDIT_ADMIN_PORT);
+    int32 adminDB = GetDlgItemInt(IDC_EDIT_ADMIN_DB);
 
-    if (redisAddress.IsEmpty()) {
+    if (adminAddress.IsEmpty()) {
         MessageBox("ADMIN address is empty", "ERROR", MB_ICONERROR);
         return false;
     }
 
-    if (redisPort < 1 || redisPort > 65535) {
+    if (adminPort < 1 || adminPort > 65535) {
         MessageBox("ADMIN Port is invalid", "ERROR", MB_ICONERROR);
         return false;
     }
-    if (redisDB < 0 || redisDB > 15) {
+    if (adminDB < 0 || adminDB > 15) {
         MessageBox("ADMIN DB is invalid", "ERROR", MB_ICONERROR);
         return false;
     }
 
-    _config.setRedisAddress(redisAddress.GetString());
-    _config.setRedisPort(redisPort);
-    _config.setRedisDB(redisDB);
+    _config.setAdminAddress(adminAddress.GetString());
+    _config.setAdminPort(adminPort);
+    _config.setAdminDB(adminDB);
     if (_config.save(path) != true) {
         MessageBox("ERROR", "Save config file failed", MB_ICONERROR);
         return false;
@@ -133,8 +137,8 @@ bool SWSMainTabCtrlPageStartStop::loadConfig(const B1String& path)
     if (_config.load(path) != true) {
         B1LOG("no config file found");
     }
-    SetDlgItemText(IDC_EDIT_ADMIN_ADDRESS, _config.redisAddress().cString());
-    SetDlgItemInt(IDC_EDIT_ADMIN_PORT, _config.redisPort());
-    SetDlgItemInt(IDC_EDIT_ADMIN_DB, _config.redisDB());
+    SetDlgItemText(IDC_EDIT_ADMIN_ADDRESS, _config.adminAddress().cString());
+    SetDlgItemInt(IDC_EDIT_ADMIN_PORT, _config.adminPort());
+    SetDlgItemInt(IDC_EDIT_ADMIN_DB, _config.adminDB());
     return true;
 }

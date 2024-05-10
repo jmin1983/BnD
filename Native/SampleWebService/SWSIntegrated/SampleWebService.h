@@ -24,7 +24,8 @@
 namespace BnD {
     class SampleWebService : public D1MainServiceWrapper<BaseSampleWebService, SampleWebService> {
     protected:
-        virtual BaseSampleWebService* createMainService(D1ProductIdentifier::SITE site, D1ProductIdentifier::TYPE type) override;
+        virtual BaseSampleWebService* createMainService(int32 site, int32 type) override;
+        D1ProductIdentifier* createProductIdentifier() final;
     };
 }   //  !BnD
 

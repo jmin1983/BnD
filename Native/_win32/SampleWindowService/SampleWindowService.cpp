@@ -26,9 +26,9 @@ SampleWindowService::SampleWindowService()
 bool SampleWindowService::start()
 {
     D1ConfFileReader config;
-    config.load();
-    if (_service->start(config.redisAddress(), config.redisPort(), config.redisDB(),
-        config.logPath("sws_winservice"), config.logCounts()) != true) {
+    config.loadDefault();
+    const B1String name = "sws";
+    if (_service->start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(name + "_winservice"), name, config.logCounts()) != true) {
         return false;
     }
     return true;

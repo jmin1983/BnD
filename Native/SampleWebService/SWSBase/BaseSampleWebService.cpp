@@ -38,11 +38,11 @@ bool BaseSampleWebService::implStart()
     uint64 loadPerfCheckTickBegin = B1TickUtil::currentTick();
 
     D1ConfFileReader confReader;
-    if (confReader.load() != true) {
+    if (confReader.loadDefault() != true) {
         B1LOG("no configuration file found -> load default value");
     }
-    B1LOG("Connecting [%s:%d(%d)]", confReader.redisAddress().cString(), confReader.redisPort(), confReader.redisDB());
-    if (initRedis(confReader.redisAddress(), confReader.redisPort(), confReader.redisDB()) != true) {
+    B1LOG("Connecting [%s:%d(%d)]", confReader.adminAddress().cString(), confReader.adminPort(), confReader.adminDB());
+    if (initRedis(confReader.adminAddress(), confReader.adminPort(), confReader.adminDB()) != true) {
         return false;
     }
     if (implInitRepositories() != true) {

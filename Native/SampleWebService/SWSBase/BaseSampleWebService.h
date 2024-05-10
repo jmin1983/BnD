@@ -25,7 +25,7 @@ namespace BnD {
     class D1RedisClientInterface;
     class B1RedisDirectClient;
     class BaseSampleWebService : public B1MainService
-                            , public B1Singleton<BaseSampleWebService> {
+                               , public B1Singleton<BaseSampleWebService> {
     public:
         BaseSampleWebService(int32 version, B1String&& buildDate, B1String&& name);
         virtual ~BaseSampleWebService() {}

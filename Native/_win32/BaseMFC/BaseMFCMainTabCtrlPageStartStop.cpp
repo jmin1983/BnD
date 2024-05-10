@@ -65,17 +65,17 @@ void BaseMFCMainTabCtrlPageStartStop::setProgramRunning(int32 idAddress, int32 i
     }
     CString caption(_captionSrc);
     {
-        CString redisAddress;
-        GetDlgItemText(idAddress, redisAddress);
-        int32 redisPort = GetDlgItemInt(idPort);
-        int32 redisDB = GetDlgItemInt(idDb);
+        CString adminAddress;
+        GetDlgItemText(idAddress, adminAddress);
+        int32 adminPort = GetDlgItemInt(idPort);
+        int32 adminDB = GetDlgItemInt(idDb);
         if (idController > 0) {
             CString dcsID;
             GetDlgItemText(idController, dcsID);
-            caption.AppendFormat("(%s:%d(%d)_%s)", redisAddress.GetString(), redisPort, redisDB, dcsID.GetString());
+            caption.AppendFormat("(%s:%d(%d)_%s)", adminAddress.GetString(), adminPort, adminDB, dcsID.GetString());
         }
         else {
-            caption.AppendFormat("(%s:%d(%d))", redisAddress.GetString(), redisPort, redisDB);
+            caption.AppendFormat("(%s:%d(%d))", adminAddress.GetString(), adminPort, adminDB);
         }
     }
     _owner->SetWindowText(caption);
@@ -92,12 +92,10 @@ void BaseMFCMainTabCtrlPageStartStop::setProgramStopped()
     }
 }
 
-void BaseMFCMainTabCtrlPageStartStop::setCaptionTypeAndSite(D1RedisClientInterface* redisReader)
+void BaseMFCMainTabCtrlPageStartStop::setCaptionTypeAndSite(const D1ProductIdentifier& productIdentifier)
 {
-    auto site = D1ProductIdentifier::getProductSite(redisReader);
-    auto eqType = D1ProductIdentifier::getProductType(redisReader);
     CString caption;
     _owner->GetWindowTextA(caption);
-    _owner->SetWindowTextA(caption + " (type:" + D1ProductIdentifier::toProductTypeString(eqType).cString() +
-                                     ", site:" + D1ProductIdentifier::toProductSiteString(site).cString() + ")");
+    _owner->SetWindowTextA(caption + " (type:" + productIdentifier.toProductTypeString().cString() +
+                                     ", site:" + productIdentifier.toProductSiteString().cString() + ")");
 }

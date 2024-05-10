@@ -39,12 +39,12 @@ int32 main(int32 argc, char* argv[])
     signal(SIGINT, signalHandler);
 
     D1ConfFileReader config;
-    config.load();
-    SampleWebService das;
-    if (SampleWebService::get()->start(config.redisAddress(), config.redisPort(), config.redisDB(),
-                                    config.logPath("sws"), config.logCounts()) != true) {
+    config.loadDefault();
+    SampleWebService sws;
+    const B1String name = "sws";
+    if (sws.start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(name), name, config.logCounts()) != true) {
         return -1;
     }
-    SampleWebService::get()->wait();
+    sws.wait();
     return 0;
 }

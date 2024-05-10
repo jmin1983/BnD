@@ -24,6 +24,6 @@ SWSMainThread::SWSMainThread(const BaseMFCTabCtrlWnd* mainTab)
 std::shared_ptr<D1ConfFileReader> SWSMainThread::implInit()
 {
     auto config = std::make_shared<D1ConfFileReader>();
-    config->load();
+    config->loadDefault();
     return config;
 }

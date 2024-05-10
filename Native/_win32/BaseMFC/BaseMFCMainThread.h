@@ -33,6 +33,7 @@ namespace BnD {
     private:
         const BaseMFCTabCtrlWnd* _mainTab;
     protected:
+        B1String _name;
         BaseMFCMainThreadListener* _listener;
     protected:
         virtual void implInitPage(const TabCtrlPage& page) {}
@@ -40,7 +41,7 @@ namespace BnD {
         virtual void implThreadBegin() override;
         virtual void implThreadEnd() override;
     public:
-        bool start(BaseMFCMainThreadListener* listener);
+        bool start(B1String&& name, BaseMFCMainThreadListener* listener);
         void checkStopped();
     };
 
@@ -68,8 +69,8 @@ namespace BnD {
                 return;
             }
             _mfcService = std::make_shared<T>();
-            if (_mfcService->start(config->redisAddress(), config->redisPort(), config->redisDB(),
-                                   config->logPath("sws_mfc"), config->logCounts()) != true) {
+            if (_mfcService->start(config->adminAddress(), config->adminPort(), config->adminDB(),
+                                   config->logPath(_name + "_mfc"), _name, config->logCounts()) != true) {
                 return;
             }
             BaseMFCMainThread::implThreadBegin();

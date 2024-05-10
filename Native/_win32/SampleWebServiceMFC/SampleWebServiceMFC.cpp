@@ -13,12 +13,14 @@
 #include "SampleWebServiceMFC.h"
 #include "StandardSampleWebServicePublic.h"
 
+#include <SampleBase/ProductIdentifier.h>
+
 using namespace BnD;
 
-BaseSampleWebService* SampleWebServiceMFC::createMainService(D1ProductIdentifier::SITE site, D1ProductIdentifier::TYPE type)
+auto SampleWebServiceMFC::createMainService(int32 site, int32 type) -> BaseSampleWebService*
 {
     switch (type) {
-        case D1ProductIdentifier::TYPE_STANDARD_SERVICE:
+        case ProductIdentifier::SAMPLE_TYPE_STANDARD_SERVICE:
             return new StandardSampleWebServicePublic();
         default:
             break;

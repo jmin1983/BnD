@@ -15,7 +15,7 @@
 #include <TabCtrlPage.h>
 
 namespace BnD {
-    class D1RedisClientInterface;
+    class D1ProductIdentifier;
 };
 
 namespace BnD {
@@ -44,6 +44,6 @@ namespace BnD {
     protected:
         void setProgramRunning(int32 idAddress, int32 idPort, int32 idDb, int32 idController = -1);
         void setProgramStopped();
-        void setCaptionTypeAndSite(D1RedisClientInterface* redisReader);
+        void setCaptionTypeAndSite(const D1ProductIdentifier& productIdentifier);
     };
 }
