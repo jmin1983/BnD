@@ -18,11 +18,11 @@
 
 using namespace BnD;
 
-auto SampleWebService::createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) -> BaseSampleWebService*
+auto SampleWebService::createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) -> std::shared_ptr<BaseSampleWebService>
 {
     switch (productIdentifier->type()) {
         case ProductIdentifier::SAMPLE_TYPE_STANDARD_SERVICE:
-            return new StandardSampleWebService();
+            return std::make_shared<StandardSampleWebService>();
         default:
             break;
     }

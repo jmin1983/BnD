@@ -24,7 +24,7 @@
 namespace BnD {
     class SampleWebService : public D1BaseServiceWrapper<BaseSampleWebService, SampleWebService> {
     protected:
-        virtual BaseSampleWebService* createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) override;
+        virtual std::shared_ptr<BaseSampleWebService> createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) override;
         int32 getServiceID(D1RedisClientInterface* redisReader) final { return 0; }
         D1ProductIdentifier* createProductIdentifier(int32 serviceID) final;
     };

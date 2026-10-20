@@ -16,7 +16,7 @@
 namespace BnD {
     class SampleWebServiceMFC : public SampleWebService {
     protected:
-        BaseSampleWebService* createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) final;
+        std::shared_ptr<BaseSampleWebService> createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) final;
     public:
         D1RedisClientInterface* redisClientInterface();
     };
