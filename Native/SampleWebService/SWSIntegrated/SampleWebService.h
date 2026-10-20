@@ -16,16 +16,17 @@
 #pragma once
 #endif
 
-#include <D1Base/D1MainServiceWrapper.h>
+#include <D1Base/D1BaseServiceWrapper.h>
 #include <D1Base/D1ProductIdentifier.h>
 
 #include <BaseSampleWebService.h>
 
 namespace BnD {
-    class SampleWebService : public D1MainServiceWrapper<BaseSampleWebService, SampleWebService> {
+    class SampleWebService : public D1BaseServiceWrapper<BaseSampleWebService, SampleWebService> {
     protected:
-        virtual BaseSampleWebService* createMainService(int32 site, int32 type) override;
-        D1ProductIdentifier* createProductIdentifier() final;
+        virtual BaseSampleWebService* createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) override;
+        int32 getServiceID(D1RedisClientInterface* redisReader) final { return 0; }
+        D1ProductIdentifier* createProductIdentifier(int32 serviceID) final;
     };
 }   //  !BnD
 

@@ -6,3 +6,7 @@
 	path = Native/D1
 	url = https://github.com/jmin1983/D1
 	branch = main
+[submodule "Native/external"]
+	path = Native/external
+	url = https://github.com/jmin1983/external
+	branch = main

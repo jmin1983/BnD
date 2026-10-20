@@ -27,8 +27,7 @@ bool SampleWindowService::start()
 {
     D1ConfFileReader config;
     config.loadDefault();
-    const B1String name = "sws";
-    if (_service->start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(name + "_winservice"), name, config.logCounts()) != true) {
+    if (_service->start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(), config.logCounts(), config.toString()) != true) {
         return false;
     }
     return true;

@@ -17,9 +17,9 @@
 
 using namespace BnD;
 
-auto SampleWebServiceMFC::createMainService(int32 site, int32 type) -> BaseSampleWebService*
+auto SampleWebServiceMFC::createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) -> BaseSampleWebService*
 {
-    switch (type) {
+    switch (productIdentifier->type()) {
         case ProductIdentifier::SAMPLE_TYPE_STANDARD_SERVICE:
             return new StandardSampleWebServicePublic();
         default:

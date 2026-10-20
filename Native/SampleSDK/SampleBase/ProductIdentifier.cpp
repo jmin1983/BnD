@@ -14,6 +14,11 @@
 
 using namespace BnD;
 
+ProductIdentifier::ProductIdentifier(int32 serviceID)
+    : D1ProductIdentifier(static_cast<D1Consts::SERVICE_ID>(serviceID))
+{
+}
+
 bool ProductIdentifier::implGetProductType(const B1String& typeString)
 {
     if (D1ProductIdentifier::implGetProductType(typeString) != true) {

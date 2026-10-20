@@ -1,0 +1,56 @@
+cmake . -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+cmake . -DBUILD_SHARED_LIBS=OFF -DBUILD_EMBEDDED=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++
+cmake . -DBUILD_SHARED_LIBS=OFF -DBUILD_EMBEDDED=ON -DBUILD_CONTROLLER_ONLY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++
+cmake . -DBUILD_SHARED_LIBS=OFF -DBUILD_EMBEDDED_32=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc-8 -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++-8
+cmake . -DBUILD_SHARED_LIBS=OFF -DBUILD_EMBEDDED_32=ON -DBUILD_CONTROLLER_ONLY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc-8 -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++-8
+
+experimental:-------------------------------
+cmake . -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+make CC=arm-linux-gnueabihf-gcc-8 CXX=arm-linux-gnueabihf-g++-8 MALLOC=libc
+
+boost:-------------------------------
+user-config.jam
+using gcc : 8 : /usr/bin/arm-linux-gnueabihf-g++-8 ;
+
+./b2 -a \
+    --ignore-site-config \
+    --user-config=./user-config.jam \
+    --with-charconv \
+    toolset=gcc-8 \
+    architecture=arm \
+    address-model=32 \
+    variant=release \
+    link=static \
+    threading=multi \
+    --prefix=/home/semits/build/boost192/boost_1_92_0/build192 \
+    install
+	
+user-config.jam	
+using gcc : 9.4.0 : /usr/bin/aarch64-linux-gnu-g++ ;
+
+./b2 -a \
+    --ignore-site-config \
+    --user-config=./user-config.jam \
+    --with-charconv \
+    toolset=gcc-9.4.0 \
+    target-os=linux \
+    architecture=arm \
+    address-model=64 \
+    variant=release \
+    link=static \
+    threading=multi \
+    --prefix=/home/semits/build/boost192/boost_1_92_0/build192 \
+    install
+
+
+openssl:-----------------------------
+perl Configure VC-WIN64A no-shared --prefix=D:/temp/result/OpenSSL --openssldir=D:/temp/result/SSL
+perl Configure VC-WIN32 no-shared --prefix=D:/temp/result/OpenSSL --openssldir=D:/temp/result/SSL
+./Configure no-shared --prefix=/home/sinclair/temp/OpenSSL_x64/openssl --openssldir=/home/sinclair/temp/OpenSSL_x64/ssl
+./Configure linux-generic64 no-shared --prefix=/home/sinclair/temp/OpenSSL/openssl --openssldir=/home/sinclair/temp/OpenSSL/ssl --cross-compile-prefix=aarch64-linux-gnu-
+./Configure linux-generic32 no-shared --prefix=/home/sinclair/temp/OpenSSL_arm/openssl --openssldir=/home/sinclair/temp/OpenSSL_arm/ssl --cross-compile-prefix=arm-linux-gnueabihf-
+
+
+redis-arm:---------------------------
+export CC=arm-linux-gnueabihf-gcc-8
+make MALLOC=libc PREFIX=/home/sinclair/re/redis-stable/install install

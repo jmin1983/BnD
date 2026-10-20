@@ -24,7 +24,7 @@
 using namespace BnD;
 
 BaseSampleWebService::BaseSampleWebService(int32 version, B1String&& buildDate, B1String&& name)
-    : B1MainService(version, std::move(buildDate), std::move(name))
+    : B1MainService(0, version, std::move(buildDate), name.copy(), name.copy())
 {
 }
 

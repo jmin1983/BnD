@@ -48,9 +48,10 @@ bool SampleMessageAnalyzer::implInitialize()
     return true;
 }
 
-auto SampleMessageAnalyzer::implAnalyzeMessage(D1MessageAnalyzerListener* listener, int32 message, const D1BaseMessage& baseMessage, const B1Archive& archive, int32 from) const -> MESSAGE_RESULT
+auto SampleMessageAnalyzer::implAnalyzeMessage(D1MessageAnalyzerListener* listener, int32 index, int32 indexCount,
+                                               int32 message, const D1BaseMessage& baseMessage, const B1Archive& archive, int32 from) const -> MESSAGE_RESULT
 {
-    const auto result = D1MessageAnalyzer::implAnalyzeMessage(listener, message, baseMessage, archive, from);
+    const auto result = D1MessageAnalyzer::implAnalyzeMessage(listener, message, index, indexCount, baseMessage, archive, from);
     if (MESSAGE_IGNORED != result) {
         return result;
     }
@@ -69,7 +70,7 @@ auto SampleMessageAnalyzer::implAnalyzeMessage(D1MessageAnalyzerListener* listen
     case MAKE_DIAACA_MSG_ENUM(c): {\
         c m(std::move(const_cast<D1BaseMessage&>(baseMessage)));\
         archive.toObject(&m);\
-        return ohtListener->onMessage##c(m, from) ? MESSAGE_COMPLETE : MESSAGE_INCOMPLETE;\
+        return ohtListener->onMessage##c(index, indexCount, m, from) ? MESSAGE_COMPLETE : MESSAGE_INCOMPLETE;\
     }
 
     switch (message) {

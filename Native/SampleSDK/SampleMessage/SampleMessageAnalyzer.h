@@ -37,7 +37,8 @@ namespace BnD {
         };
     protected:
         bool implInitialize() final;
-        MESSAGE_RESULT implAnalyzeMessage(D1MessageAnalyzerListener* listener, int32 message, const D1BaseMessage& baseMessage, const B1Archive& archive, int32 from) const final;
+        MESSAGE_RESULT implAnalyzeMessage(D1MessageAnalyzerListener* listener, int32 index, int32 indexCount,
+                                          int32 message, const D1BaseMessage& baseMessage, const B1Archive& archive, int32 from) const final;
     };
 }   //  !BnD
 

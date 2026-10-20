@@ -41,8 +41,7 @@ int32 main(int32 argc, char* argv[])
     D1ConfFileReader config;
     config.loadDefault();
     SampleWebService sws;
-    const B1String name = "sws";
-    if (sws.start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(name), name, config.logCounts()) != true) {
+    if (sws.start(config.adminAddress(), config.adminPort(), config.adminDB(), config.logPath(), config.logCounts(), config.toString()) != true) {
         return -1;
     }
     sws.wait();

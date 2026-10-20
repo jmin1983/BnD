@@ -21,18 +21,17 @@
 #include <B1Base/B1Logger.h>
 
 #if defined(_WIN32)
+#pragma comment(lib, "libcrypto.lib")
+#pragma comment(lib, "libssl.lib")
+#pragma comment(lib, "crypt32.lib")
 #if defined(_DLL)
 #if defined(_DEBUG)
-#pragma comment(lib, "libcryptoMDd.lib")
-#pragma comment(lib, "libsslMDd.lib")
+#pragma comment(lib, "zlibstaticMDd.lib")
 #else
-#pragma comment(lib, "libcryptoMD.lib")
-#pragma comment(lib, "libsslMD.lib")
+#pragma comment(lib, "zlibstaticMD.lib")
 #endif
 #else
-#pragma comment(lib, "libcryptoMT.lib")
-#pragma comment(lib, "libsslMT.lib")
-#pragma comment(lib, "crypt32.lib")
+#pragma comment(lib, "zlibstaticMT.lib")
 #endif
 #endif
 

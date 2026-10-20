@@ -22,12 +22,12 @@
 
 namespace BnD {
     class SampleWebServerSession : protected SampleMessageAnalyzerListener
-                              , public B1WebSocketServerSession {
+                                 , public B1WebSocketServerSession {
     public:
         SampleWebServerSession(B1ServerSocket* serverSocket, B1BaseServerSessionListener* listener);
         virtual ~SampleWebServerSession();
     protected:  //  SampleMessageAnalyzerListener
-        bool onMessageSampleMsgInitializeReq(const SampleMsgInitializeReq& data, int32 from) final;
+        bool onMessageSampleMsgInitializeReq(int32 index, int32 indexCount, const SampleMsgInitializeReq& data, int32 from) final;
     protected:  // B1WebSocketServerSession
         void onWebSocketAccepted() final;
         bool onWebSocketReadComplete(B1String&& text) final;                //  return false if there are no more data to read.

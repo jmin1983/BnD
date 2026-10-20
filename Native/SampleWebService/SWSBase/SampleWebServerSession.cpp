@@ -32,7 +32,7 @@ SampleWebServerSession::~SampleWebServerSession()
 {
 }
 
-bool SampleWebServerSession::onMessageSampleMsgInitializeReq(const SampleMsgInitializeReq& data, int32 from)
+bool SampleWebServerSession::onMessageSampleMsgInitializeReq(int32 index, int32 indexCount, const SampleMsgInitializeReq& data, int32 from)
 {
     SampleMsgInitializeRsp rsp;
     rsp.setSessionID(111);
@@ -48,7 +48,7 @@ void SampleWebServerSession::onWebSocketAccepted()
 
 bool SampleWebServerSession::onWebSocketReadComplete(B1String&& text)
 {
-    BaseSampleWebService::get()->messageAnalyzer()->analyzeMessage(this, text, 0);
+    BaseSampleWebService::get()->messageAnalyzer()->analyzeMessage(this, 0, 1, text, 0);
     return true;
 }
 

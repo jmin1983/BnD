@@ -18,9 +18,9 @@
 
 using namespace BnD;
 
-auto SampleWebService::createMainService(int32 site, int32 type) -> BaseSampleWebService*
+auto SampleWebService::createMainService(std::shared_ptr<D1ProductIdentifier> productIdentifier) -> BaseSampleWebService*
 {
-    switch (type) {
+    switch (productIdentifier->type()) {
         case ProductIdentifier::SAMPLE_TYPE_STANDARD_SERVICE:
             return new StandardSampleWebService();
         default:
@@ -29,7 +29,7 @@ auto SampleWebService::createMainService(int32 site, int32 type) -> BaseSampleWe
     return NULL;
 }
 
-auto SampleWebService::createProductIdentifier() -> D1ProductIdentifier*
+auto SampleWebService::createProductIdentifier(int32 serviceID) -> D1ProductIdentifier*
 {
-    return new ProductIdentifier();
+    return new ProductIdentifier(serviceID);
 }

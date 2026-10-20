@@ -84,9 +84,9 @@ void SWSMainTabCtrlPageStartStop::onBnClickedBtnLoadConfig()
 
 bool SWSMainTabCtrlPageStartStop::implReloadPage()
 {
-    ProductIdentifier productIdentifier;
-    productIdentifier.getProductInfo(SWSMainThread::get()->mainService()->redisClientInterface());
-    setCaptionTypeAndSite(productIdentifier);
+    //ProductIdentifier productIdentifier;
+    //productIdentifier.getProductInfo(SWSMainThread::get()->mainService()->redisClientInterface());
+    //setCaptionTypeAndSite(productIdentifier);
     return true;
 }
 

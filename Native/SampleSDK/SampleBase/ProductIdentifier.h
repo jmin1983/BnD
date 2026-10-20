@@ -21,6 +21,8 @@
 namespace BnD {
     class ProductIdentifier : public D1ProductIdentifier {
     public:
+        ProductIdentifier(int32 serviceID);
+    public:
         enum SAMPLE_TYPE {
             SAMPLE_TYPE_STANDARD_SERVICE = TYPE_RESERVED_BEGIN,
 
